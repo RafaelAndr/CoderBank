@@ -24,6 +24,7 @@ public class ClientService {
     public ClientResponseDto save(final ClientRequestDto clientRequestDto){
 
         checkDuplicatedCpf(clientRequestDto.cpf());
+        checkDuplicatedEmail(clientRequestDto.email());
 
         var clientEntity = mapper.toEntity(clientRequestDto);
 
@@ -38,6 +39,13 @@ public class ClientService {
 
         if (repository.existsByCpf(cpf)) {
             throw new ClientAlreadyExistsException("Client with cpf " + cpf + " already exists");
+        }
+    }
+
+    private void checkDuplicatedEmail(String email){
+
+        if (repository.existsByEmail(email)) {
+            throw new DuplicatedEmailException("Email " + email + " is in use");
         }
     }
 }

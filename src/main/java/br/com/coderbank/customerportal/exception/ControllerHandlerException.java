@@ -13,9 +13,14 @@ public class ControllerHandlerException {
     @ExceptionHandler({ClientAlreadyExistsException.class})
     @ResponseBody
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorResponseDto conflict(final Throwable exception){
-        final var exceptionMessage = exception.getMessage();
+    public ErrorResponseDto handleClientAlreadyExists(ClientAlreadyExistsException e){
+        return new ErrorResponseDto(e.getMessage());
+    }
 
-        return new ErrorResponseDto(exceptionMessage);
+    @ExceptionHandler({DuplicatedEmailException.class})
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponseDto handleDuplicatedEmailException(DuplicatedEmailException e){
+        return new ErrorResponseDto(e.getMessage());
     }
 }
