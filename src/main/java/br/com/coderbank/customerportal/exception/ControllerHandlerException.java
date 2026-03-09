@@ -19,38 +19,6 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class ControllerHandlerException {
 
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    @ResponseBody
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public ProblemDetail handleMethodArgumentNotValidExcepition(MethodArgumentNotValidException e){
-//
-//        final var validationErrors = buildHashMapValidationErrors(e);
-//
-//        var problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, validationErrors.toString());
-//
-//        problemDetail.setTitle("Data sent in the request is invalid");
-//        problemDetail.setType(URI.create("http://www.siteexemplo.com.br"));
-//        problemDetail.setProperty("errors", validationErrors);
-//
-//        return problemDetail;
-//    }
-//
-//    private static HashMap<Object, Object> buildHashMapValidationErrors(MethodArgumentNotValidException e) {
-//        final var errors = new HashMap<>();
-//
-//        e.getBindingResult()
-//                .getAllErrors()
-//                .forEach((error) -> {
-//
-//                    var fieldName = ((FieldError) error).getField();
-//
-//                    var errorMessage = error.getDefaultMessage();
-//
-//                    errors.put(fieldName, errorMessage);
-//                });
-//        return errors;
-//    }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ProblemDetail handleValidation(MethodArgumentNotValidException e){
@@ -99,5 +67,4 @@ public class ControllerHandlerException {
 
         return problemDetail;
     }
-
 }
