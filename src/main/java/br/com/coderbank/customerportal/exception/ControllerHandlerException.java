@@ -23,7 +23,8 @@ public class ControllerHandlerException {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ProblemDetail handleValidation(MethodArgumentNotValidException e){
 
-        Map<String, String> errors = e.getBindingResult()
+        Map<String, String> errors = e
+                .getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .collect(Collectors.toMap(

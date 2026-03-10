@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/clients")
+@RequestMapping("/v1/clientes")
 @RequiredArgsConstructor
 public class ClientController {
 
@@ -25,6 +25,8 @@ public class ClientController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(service.save(clientRequestDto));
     }
+
+
 
     @GetMapping
     public ResponseEntity<Page<ClientListDto>> getPagedClients(Pageable pageable){
