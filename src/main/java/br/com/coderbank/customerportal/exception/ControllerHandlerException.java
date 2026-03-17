@@ -1,7 +1,5 @@
 package br.com.coderbank.customerportal.exception;
 
-import br.com.coderbank.customerportal.dto.response.ErrorResponseDto;
-import org.jspecify.annotations.NonNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.validation.FieldError;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.net.URI;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -43,10 +40,10 @@ public class ControllerHandlerException {
         return problemDetail;
     }
 
-    @ExceptionHandler({ClientAlreadyExistsException.class})
+    @ExceptionHandler({CustomerAlreadyExistsException.class})
     @ResponseBody
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ProblemDetail handleClientAlreadyExists(ClientAlreadyExistsException e){
+    public ProblemDetail handleClientAlreadyExists(CustomerAlreadyExistsException e){
 
         var problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, e.getMessage());
 

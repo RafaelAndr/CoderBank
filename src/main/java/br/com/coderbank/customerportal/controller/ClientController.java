@@ -1,9 +1,9 @@
 package br.com.coderbank.customerportal.controller;
 
-import br.com.coderbank.customerportal.dto.response.ClientListDto;
-import br.com.coderbank.customerportal.dto.response.ClientResponseDto;
-import br.com.coderbank.customerportal.dto.request.ClientRequestDto;
-import br.com.coderbank.customerportal.service.ClientService;
+import br.com.coderbank.customerportal.dto.response.CustomerListDto;
+import br.com.coderbank.customerportal.dto.response.CustomerResponseDto;
+import br.com.coderbank.customerportal.dto.request.CustomerRequestDto;
+import br.com.coderbank.customerportal.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,23 +13,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/clientes")
+@RequestMapping("/v1/customers")
 @RequiredArgsConstructor
 public class ClientController {
 
-    private final ClientService service;
+    private final CustomerService service;
 
     @PostMapping
-    public ResponseEntity<ClientResponseDto> save(@RequestBody @Valid ClientRequestDto clientRequestDto){
+    public ResponseEntity<CustomerResponseDto> save(@RequestBody @Valid CustomerRequestDto customerRequestDto){
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(service.save(clientRequestDto));
+                .body(service.save(customerRequestDto));
     }
 
 
 
     @GetMapping
-    public ResponseEntity<Page<ClientListDto>> getPagedClients(Pageable pageable){
+    public ResponseEntity<Page<CustomerListDto>> getPagedClients(Pageable pageable){
         return ResponseEntity.ok(service.getPagedClients(pageable));
     }
  }
