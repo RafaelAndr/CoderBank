@@ -1,6 +1,5 @@
 package br.com.coderbank.customerportal.service;
 
-import br.com.coderbank.customerportal.client.AccountsFeignClient;
 import br.com.coderbank.customerportal.dto.request.CreateAccountRequestDto;
 import br.com.coderbank.customerportal.dto.request.CustomerRequestDto;
 import br.com.coderbank.customerportal.dto.response.CustomerListDto;
@@ -16,15 +15,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
 
     private final CustomerRepository repository;
-    private final AccountsFeignClient accountsFeignClient;
     private final CustomerMapper mapper;
+    private final AccountIntegrationService accountIntegrationService;
 
     public CustomerResponseDto save(final CustomerRequestDto customerRequestDto){
 
@@ -39,7 +36,7 @@ public class CustomerService {
 
         CreateAccountRequestDto createAccountRequestDto = mapper.toCreateAccountDto(savedCustomer);
 
-        accountsFeignClient.createAccount(createAccountRequestDto);
+        accountIntegrationService.createAccount(createAccountRequestDto);
 
         return mapper.toDto(savedCustomer);
     }

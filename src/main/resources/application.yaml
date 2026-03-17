@@ -17,3 +17,21 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+feign:
+  circuitbreaker:
+    enabled: true
+
+resilience4j:
+  retry:
+    instances:
+      AccountServiceRetry:
+        maxAttempts: 3
+        waitDuration: 1s
+
+  circuitbreaker:
+    instances:
+      accountServiceCB:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
