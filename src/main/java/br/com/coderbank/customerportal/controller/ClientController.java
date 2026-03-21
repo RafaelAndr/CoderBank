@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/v1/customers")
@@ -34,6 +35,11 @@ public class ClientController {
         return ResponseEntity.ok(service.getPagedClients(pageable));
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
     @GetMapping("/pending")
     public List<PendingAccount> getPendingAccounts(){

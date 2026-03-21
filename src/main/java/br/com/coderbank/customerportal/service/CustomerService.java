@@ -73,4 +73,12 @@ public class CustomerService {
     public List<PendingAccount> getPendingAccounts(){
         return pendingAccountRepository.findByAccountStatus(AccountStatus.PENDING);
     }
+
+    public void delete(UUID id){
+        if (!repository.existsById(id)){
+            throw new EntityNotFoundException("Customer not found");
+        }
+        repository.deleteById(id);
+    }
+
 }
