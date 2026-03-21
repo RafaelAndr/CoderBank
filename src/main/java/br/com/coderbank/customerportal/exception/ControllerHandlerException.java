@@ -1,5 +1,6 @@
 package br.com.coderbank.customerportal.exception;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.validation.FieldError;
@@ -63,6 +64,18 @@ public class ControllerHandlerException {
         problemDetail.setTitle("Conflict: Existing email");
         problemDetail.setType(URI.create("http://www.siteexemplo.com.br"));
 
+        return problemDetail;
+    }
+
+    @ExceptionHandler({EntityNotFoundException.class})
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ProblemDetail handleEntityNotFoundException(EntityNotFoundException e){
+
+        var problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+
+        problemDetail.setTitle("Not found entity");
+        problemDetail.setType(URI.create("http://www.siteexemplo.com.br"));
         return problemDetail;
     }
 }
